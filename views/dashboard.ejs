@@ -3,40 +3,48 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Cantina Escolar</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/dashboard.css">
 </head>
 
 <body>
     <nav class="navbar">
-        <div class="nav-brand">🍕 Cantina Escolar</div>
-        <div class="nav-links">
-            <span>Bem-vindo, <%= user.nickname %>!</span>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/cadastro-produto">Produtos</a>
-            <a href="/movimentacoes">Vendas</a>
-            <a href="/logout">Sair</a>
+        <div class="navbar-content">
+            <div class="nav-brand">🍕 Cantina Escolar</div>
+            <div class="nav-links">
+                <span class="user-welcome">Olá, <%= user.nickname %>!</span>
+                <a href="/dashboard" class="active">Dashboard</a>
+                <a href="/cadastro-produto">Produtos</a>
+                <a href="/movimentacoes">Vendas</a>
+                <a href="/logout">Sair</a>
+            </div>
         </div>
     </nav>
 
-    <div class="container">
-        <h2>📊 Painel de Controle</h2>
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">📊 Painel de Controle</h1>
+            <p class="page-subtitle">Visão geral do sistema de gestão da cantina</p>
+        </div>
         
         <div class="stats-grid">
             <div class="stat-card">
                 <h3>Total de Produtos</h3>
                 <p class="stat-number"><%= totalProdutos %></p>
+                <span class="stat-icon">🛒</span>
             </div>
             <div class="stat-card">
                 <h3>Total de Vendas</h3>
                 <p class="stat-number"><%= totalMov %></p>
+                <span class="stat-icon">💰</span>
             </div>
         </div>
 
         <div class="alert-section">
-            <h3>⚠️ Produtos com Estoque Baixo (Menos de 5 unidades)</h3>
+            <h3>⚠️ Produtos com Estoque Baixo</h3>
             <% if (produtosBaixos.length === 0) { %>
-                <p class="success">✅ Todos os produtos estão com estoque adequado!</p>
+                <p class="success-message">Todos os produtos estão com estoque adequado!</p>
             <% } else { %>
                 <table>
                     <thead>

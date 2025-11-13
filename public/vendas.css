@@ -1,0 +1,357 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to bottom, #FFF5EB 0%, #FFE5CC 100%);
+    min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(135deg, #FF8C42 0%, #FFB380 100%);
+    padding: 0;
+    box-shadow: 0 4px 20px rgba(255, 140, 66, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    font-size: 26px;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.user-welcome {
+    color: white;
+    margin-right: 15px;
+    font-weight: 500;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Container Principal */
+.main-container {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 0 30px;
+}
+
+.page-title {
+    font-size: 36px;
+    color: #FF8C42;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* Grid Layout */
+.sales-layout {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 30px;
+}
+
+/* Formulário de Nova Venda */
+.new-sale-card {
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(255, 140, 66, 0.1);
+    border: 2px solid #FFE5CC;
+    height: fit-content;
+    position: sticky;
+    top: 120px;
+}
+
+.card-title {
+    color: #FF8C42;
+    font-size: 22px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #FFE5CC;
+}
+
+.card-title::before {
+    content: '🛒';
+    font-size: 26px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    color: #666;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+select, input {
+    padding: 14px 16px;
+    border: 2px solid #FFE5CC;
+    border-radius: 12px;
+    font-size: 15px;
+    transition: all 0.3s;
+    background: #FFF9F5;
+}
+
+select:focus, input:focus {
+    outline: none;
+    border-color: #FF8C42;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(255, 140, 66, 0.1);
+}
+
+button[type="submit"] {
+    padding: 16px;
+    background: linear-gradient(135deg, #FF8C42, #FFB380);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 140, 66, 0.3);
+    margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 140, 66, 0.4);
+}
+
+/* Histórico de Vendas */
+.sales-history {
+    background: white;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(255, 140, 66, 0.1);
+    border: 2px solid #FFE5CC;
+}
+
+.history-title {
+    color: #FF8C42;
+    font-size: 22px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #FFE5CC;
+}
+
+.history-title::before {
+    content: '📊';
+    font-size: 26px;
+}
+
+/* Tabela */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 20px;
+}
+
+thead {
+    background: linear-gradient(135deg, #FF8C42, #FFB380);
+    color: white;
+}
+
+th {
+    padding: 16px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+th:first-child {
+    border-radius: 12px 0 0 0;
+}
+
+th:last-child {
+    border-radius: 0 12px 0 0;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #FFE5CC;
+    color: #555;
+    font-size: 14px;
+}
+
+tbody tr {
+    background: white;
+    transition: all 0.3s;
+}
+
+tbody tr:hover {
+    background: #FFF9F5;
+    transform: scale(1.005);
+    box-shadow: 0 2px 8px rgba(255, 140, 66, 0.1);
+}
+
+tbody tr:nth-child(even) {
+    background: #FFFBF7;
+}
+
+tbody tr:nth-child(even):hover {
+    background: #FFF9F5;
+}
+
+.no-data {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+}
+
+.no-data::before {
+    content: '📭';
+    display: block;
+    font-size: 60px;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.no-data-text {
+    font-size: 16px;
+    font-style: italic;
+}
+
+/* Badge de Quantidade */
+.quantity-badge {
+    background: linear-gradient(135deg, #4CAF50, #66BB6A);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+/* Badge de Valor */
+.price-badge {
+    background: linear-gradient(135deg, #FF8C42, #FFB380);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+/* Vendedor Badge */
+.seller-badge {
+    background: #E3F2FD;
+    color: #1976D2;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.seller-badge::before {
+    content: '👤';
+    font-size: 14px;
+}
+
+/* Data Badge */
+.date-text {
+    color: #999;
+    font-size: 13px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .sales-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .new-sale-card {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .page-title {
+        font-size: 28px;
+    }
+
+    .new-sale-card, .sales-history {
+        padding: 25px 20px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 10px 8px;
+    }
+
+    .card-title, .history-title {
+        font-size: 18px;
+    }
+}

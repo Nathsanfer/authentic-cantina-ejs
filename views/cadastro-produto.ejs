@@ -3,27 +3,30 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Produtos - Cantina Escolar</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/produtos.css">
 </head>
 
 <body>
     <nav class="navbar">
-        <div class="nav-brand">🍕 Cantina Escolar</div>
-        <div class="nav-links">
-            <span>Bem-vindo, <%= user.nickname %>!</span>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/cadastro-produto">Produtos</a>
-            <a href="/movimentacoes">Vendas</a>
-            <a href="/logout">Sair</a>
+        <div class="navbar-content">
+            <div class="nav-brand">🍕 Cantina Escolar</div>
+            <div class="nav-links">
+                <span class="user-welcome">Olá, <%= user.nickname %>!</span>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/cadastro-produto" class="active">Produtos</a>
+                <a href="/movimentacoes">Vendas</a>
+                <a href="/logout">Sair</a>
+            </div>
         </div>
     </nav>
 
-    <div class="container">
-        <h2>🛒 Gerenciamento de Produtos</h2>
+    <div class="main-container">
+        <h1 class="page-title">🛒 Gerenciamento de Produtos</h1>
 
-        <div class="form-section">
-            <h3>Adicionar Novo Produto</h3>
+        <div class="content-section">
+            <h3 class="section-title">➕ Adicionar Novo Produto</h3>
             <form action="/cadastro-produto" method="POST">
                 <input type="text" name="nome" placeholder="Nome do Produto" required>
                 <input type="number" step="0.01" name="preco" placeholder="Preço (R$)" required>
@@ -32,19 +35,21 @@
             </form>
         </div>
 
-        <div class="search-section">
-            <h3>Buscar Produtos</h3>
-            <form action="/cadastro-produto" method="GET">
-                <input type="text" name="busca" placeholder="Digite o nome do produto..." value="<%= busca %>">
-                <button type="submit">🔍 Buscar</button>
+        <div class="content-section">
+            <h3 class="section-title">🔍 Buscar Produtos</h3>
+            <form action="/cadastro-produto" method="GET" class="search-form">
+                <div class="search-input">
+                    <input type="text" name="busca" placeholder="Digite o nome do produto..." value="<%= busca %>">
+                </div>
+                <button type="submit">Buscar</button>
                 <% if (busca) { %>
-                    <a href="/cadastro-produto" class="btn-secondary">Limpar</a>
+                    <a href="/cadastro-produto" class="btn-secondary" style="text-decoration: none; display: inline-block;">Limpar</a>
                 <% } %>
             </form>
         </div>
 
-        <div class="table-section">
-            <h3>Produtos Cadastrados</h3>
+        <div class="content-section">
+            <h3 class="section-title">📦 Produtos Cadastrados</h3>
             <% if (produtos.length === 0) { %>
                 <p class="no-data">Nenhum produto encontrado.</p>
             <% } else { %>

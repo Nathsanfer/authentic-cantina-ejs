@@ -3,23 +3,36 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Cantina Escolar</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/login.css">
 </head>
 
 <body>
-    <div class="container">
-        <h2>🔒 Acesso ao Sistema</h2>
-        <form action="/login" method="POST">
-            <input type="text" name="username" placeholder="Usuário" required>
-            <input type="password" name="password" placeholder="Senha" required>
-            <button type="submit">Entrar</button>
-        </form>
-        <% if (erro) { %>
-            <p class="erro">
-                <%= erro %>
-            </p>
+    <div class="login-wrapper">
+        <div class="login-container">
+            <div class="logo">🍕</div>
+            <h2>Cantina Escolar</h2>
+            <p class="subtitle">Acesse sua conta para continuar</p>
+            
+            <form action="/login" method="POST">
+                <div class="input-group">
+                    <span class="input-icon">👤</span>
+                    <input type="text" name="username" placeholder="Nome de usuário" required>
+                </div>
+                <div class="input-group">
+                    <span class="input-icon">🔒</span>
+                    <input type="password" name="password" placeholder="Senha" required>
+                </div>
+                <button type="submit">Entrar no Sistema</button>
+            </form>
+            
+            <% if (erro) { %>
+                <p class="erro"><%= erro %></p>
             <% } %>
+            
+            <p class="footer-text">Sistema de Gestão da Cantina Escolar</p>
+        </div>
     </div>
 </body>
 
