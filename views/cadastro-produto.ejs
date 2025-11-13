@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Produtos - Cantina Escolar</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">🍕 Cantina Escolar</div>
+        <div class="nav-links">
+            <span>Bem-vindo, <%= user.nickname %>!</span>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/cadastro-produto">Produtos</a>
+            <a href="/movimentacoes">Vendas</a>
+            <a href="/logout">Sair</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>🛒 Gerenciamento de Produtos</h2>
+
+        <div class="form-section">
+            <h3>Adicionar Novo Produto</h3>
+            <form action="/cadastro-produto" method="POST">
+                <input type="text" name="nome" placeholder="Nome do Produto" required>
+                <input type="number" step="0.01" name="preco" placeholder="Preço (R$)" required>
+                <input type="number" name="quantidade" placeholder="Quantidade Inicial" required>
+                <button type="submit">Cadastrar Produto</button>
+            </form>
+        </div>
+
+        <div class="search-section">
+            <h3>Buscar Produtos</h3>
+            <form action="/cadastro-produto" method="GET">
+                <input type="text" name="busca" placeholder="Digite o nome do produto..." value="<%= busca %>">
+                <button type="submit">🔍 Buscar</button>
+                <% if (busca) { %>
+                    <a href="/cadastro-produto" class="btn-secondary">Limpar</a>
+                <% } %>
+            </form>
+        </div>
+
+        <div class="table-section">
+            <h3>Produtos Cadastrados</h3>
+            <% if (produtos.length === 0) { %>
+                <p class="no-data">Nenhum produto encontrado.</p>
+            <% } else { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Preço</th>
+                            <th>Estoque</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% produtos.forEach(produto => { %>
+                            <tr>
+                                <td><%= produto.id_produto %></td>
+                                <td><%= produto.nome %></td>
+                                <td>R$ <%= parseFloat(produto.preco).toFixed(2) %></td>
+                                <td class="<%= produto.quantidade < 5 ? 'quantidade-baixa' : '' %>">
+                                    <%= produto.quantidade || 0 %>
+                                </td>
+                                <td class="actions">
+                                    <button onclick="editarProduto(<%= produto.id_produto %>, '<%= produto.nome %>', <%= produto.preco %>, <%= produto.quantidade || 0 %>)" class="btn-edit">
+                                        ✏️ Editar
+                                    </button>
+                                    <form action="/cadastro-produto/delete/<%= produto.id_produto %>" method="POST" style="display:inline;" 
+                                          onsubmit="return confirm('Tem certeza que deseja excluir este produto?')">
+                                        <button type="submit" class="btn-delete">🗑️ Excluir</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- Modal de Edição -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal()">&times;</span>
+            <h3>Editar Produto</h3>
+            <form id="editForm" method="POST">
+                <input type="text" id="edit-nome" name="nome" placeholder="Nome do Produto" required>
+                <input type="number" step="0.01" id="edit-preco" name="preco" placeholder="Preço (R$)" required>
+                <input type="number" id="edit-quantidade" name="quantidade" placeholder="Quantidade" required>
+                <button type="submit">Atualizar Produto</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function editarProduto(id, nome, preco, quantidade) {
+            document.getElementById('editModal').style.display = 'block';
+            document.getElementById('editForm').action = `/cadastro-produto/update/${id}`;
+            document.getElementById('edit-nome').value = nome;
+            document.getElementById('edit-preco').value = preco;
+            document.getElementById('edit-quantidade').value = quantidade;
+        }
+
+        function fecharModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('editModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

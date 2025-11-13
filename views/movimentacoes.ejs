@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vendas - Cantina Escolar</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">🍕 Cantina Escolar</div>
+        <div class="nav-links">
+            <span>Bem-vindo, <%= user.nickname %>!</span>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/cadastro-produto">Produtos</a>
+            <a href="/movimentacoes">Vendas</a>
+            <a href="/logout">Sair</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>💰 Registro de Vendas</h2>
+
+        <div class="form-section">
+            <h3>Nova Venda</h3>
+            <form action="/movimentacoes" method="POST" onsubmit="return validarVenda()">
+                <select name="produto_id" id="produto_id" required>
+                    <option value="">Selecione um produto</option>
+                    <% produtos.forEach(produto => { %>
+                        <option value="<%= produto.id_produto %>">
+                            <%= produto.nome %> - R$ <%= parseFloat(produto.preco).toFixed(2) %>
+                        </option>
+                    <% }) %>
+                </select>
+                <input type="number" name="quantidade" id="quantidade" placeholder="Quantidade" min="1" required>
+                <button type="submit">Registrar Venda</button>
+            </form>
+        </div>
+
+        <div class="table-section">
+            <h3>Histórico de Vendas</h3>
+            <% if (movimentos.length === 0) { %>
+                <p class="no-data">Nenhuma venda registrada ainda.</p>
+            <% } else { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Valor Total</th>
+                            <th>Vendedor</th>
+                            <th>Data/Hora</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% movimentos.forEach(mov => { %>
+                            <tr>
+                                <td><%= mov.id_venda %></td>
+                                <td><%= mov.nome %></td>
+                                <td><%= mov.quantidade %></td>
+                                <td>R$ <%= parseFloat(mov.preco_total).toFixed(2) %></td>
+                                <td><%= mov.nickname %></td>
+                                <td><%= new Date(mov.data_venda).toLocaleString('pt-BR') %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            <% } %>
+        </div>
+    </div>
+
+    <script>
+        function validarVenda() {
+            const produtoId = document.getElementById('produto_id').value;
+            const quantidade = document.getElementById('quantidade').value;
+
+            if (!produtoId) {
+                alert('Por favor, selecione um produto!');
+                return false;
+            }
+
+            if (quantidade < 1) {
+                alert('A quantidade deve ser maior que zero!');
+                return false;
+            }
+
+            return confirm(`Confirma a venda de ${quantidade} unidade(s)?`);
+        }
+    </script>
+</body>
+
+</html>

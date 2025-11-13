@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Cantina Escolar</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">🍕 Cantina Escolar</div>
+        <div class="nav-links">
+            <span>Bem-vindo, <%= user.nickname %>!</span>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/cadastro-produto">Produtos</a>
+            <a href="/movimentacoes">Vendas</a>
+            <a href="/logout">Sair</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2>📊 Painel de Controle</h2>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total de Produtos</h3>
+                <p class="stat-number"><%= totalProdutos %></p>
+            </div>
+            <div class="stat-card">
+                <h3>Total de Vendas</h3>
+                <p class="stat-number"><%= totalMov %></p>
+            </div>
+        </div>
+
+        <div class="alert-section">
+            <h3>⚠️ Produtos com Estoque Baixo (Menos de 5 unidades)</h3>
+            <% if (produtosBaixos.length === 0) { %>
+                <p class="success">✅ Todos os produtos estão com estoque adequado!</p>
+            <% } else { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Preço</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% produtosBaixos.forEach(produto => { %>
+                            <tr class="alert-row">
+                                <td><%= produto.nome %></td>
+                                <td class="quantidade-baixa"><%= produto.quantidade %></td>
+                                <td>R$ <%= parseFloat(produto.preco).toFixed(2) %></td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            <% } %>
+        </div>
+    </div>
+</body>
+
+</html>
