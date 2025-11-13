@@ -1,6 +1,7 @@
-DROP DATABASE IF EXISTS cantina_db;
 CREATE DATABASE cantina_db;
 \c cantina_db;
+
+// CRIAÇÂO DAS TABELAS
 
 CREATE TABLE produtos (
     id_produto SERIAL PRIMARY KEY,
@@ -28,6 +29,8 @@ CREATE TABLE vendas (
     preco_total DECIMAL(10, 2) NOT NULL,
     data_venda TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+// INSERÇÃO DE DADOS INICIAIS
 
 INSERT INTO produtos (nome, preco) VALUES 
 ('Sanduíche Natural', 8.50),
